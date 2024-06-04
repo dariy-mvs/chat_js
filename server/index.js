@@ -29,7 +29,7 @@ io.on('connection', (socket) => {
       user: {
         username: 'admin'
       }, 
-      text: `Welcome to the room ${room}` 
+      text: `Welcome, your room is ${room}` 
     } });
   });
 

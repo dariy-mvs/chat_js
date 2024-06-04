@@ -1,0 +1,76 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "jest": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "plugin:prettier/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": "latest",
+    "sourceType": "module"
+  },
+  "plugins": ["react-hooks", "@typescript-eslint", "prettier", "simple-import-sort"],
+  "rules": {
+    "react/jsx-curly-brace-presence": ["error", { "props": "never", "children": "never" }],
+    "react/react-in-jsx-scope": "off",
+    "no-extra-boolean-cast": "off",
+    "no-duplicate-imports": "error",
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/ban-ts-comment": ["error", { "ts-ignore": "allow-with-description" }],
+    "react/display-name": "off",
+    "prefer-const": "off",
+    "no-debugger": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "react-i18next"
+          }
+        ]
+      }
+    ]
+  },
+  "settings": {
+    "import/resolver": {
+      "typescript": {}
+    }
+  },
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "quotes": ["error", "double"],
+
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              ["^react", "^@?\\w", "^[a-zA-Z]/.*|$"],
+              [
+                // TODO заменить рукописные импорты регуляркой, добавить правило для console.log, добавить правило для строк в пропсах
+                "^(~/(app|configs|i18n|lib|constants|modules|entities|features|widgets|pages|assets|shared))(/.*|$)",
+                "^\\./(?=.*/)(?!/?$)",
+                "^\\.(?!/?$)",
+                "^\\./?$"
+              ]
+            ]
+          }
+        ],
+        "simple-import-sort/sort": "off"
+      }
+    }
+  ]
+}
