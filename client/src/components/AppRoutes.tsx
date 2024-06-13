@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 
-import Chat from "./Chat";
+import { Chat } from "./Chat";
 import Main from "./Main";
 
 const AppRoutes = () => {

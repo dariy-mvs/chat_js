@@ -2,6 +2,7 @@ const express = require('express');
 const http = require('http');
 const { Server } = require('socket.io');
 const cors = require('cors');
+const { addUser } = require('./users');
 
 const router = require('./route');
 
@@ -24,14 +25,17 @@ io.on('connection', (socket) => {
   socket.on('join', ({username, room}) => {
     console.log('Join: ', username, room);
     socket.join(room);
+    const user = addUser({user: {name: username}, room});
     socket.emit('message', 
     { data: { 
       user: {
-        username: 'admin'
+        username: username
       }, 
       text: `Welcome, your room is ${room}` 
     } });
+    socket.broadcast.emit('message', { data: { user: { username: user.user.name }, text: 'A new user has joined' } });
   });
+
 
   socket.on('message', (message) => {
     console.log('Message: ', message);
